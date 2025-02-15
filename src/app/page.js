@@ -2,12 +2,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Merriweather } from 'next/font/google';
+import { motion, AnimatePresence } from "framer-motion";
+import { Merriweather, Poppins, IBM_Plex_Mono } from 'next/font/google';
 
 const merriweather = Merriweather({
   weight: ['300', '400'],
   style: ['normal', 'italic'],
+  subsets: ['latin'],
+});
+
+const poppins = Poppins({
+  weight: ['300', '400'],
+  subsets: ['latin'],
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  weight: ['300', '400'],
   subsets: ['latin'],
 });
 
@@ -26,7 +36,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Header */}
-      <header className="fixed w-full top-0 p-6 bg-black/90 backdrop-blur-sm z-50">
+      <header className="fixed w-full top-0 p-6 bg-black/50 backdrop-blur-sm z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <Link href="/" className="text-2xl font-bold">
             <span className="text-gray-400">{'{'}</span>
@@ -36,35 +46,58 @@ export default function Home() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex gap-8">
-            <Link href="/" className="hover:text-[#3ccf91] transition-colors">Home</Link>
-            <Link href="#projects" className="hover:text-[#3ccf91] transition-colors">Projects</Link>
-            <Link href="#blog" className="hover:text-[#3ccf91] transition-colors">Blog</Link>
+            <Link href="/" className={`hover:text-[#3ccf91] transition-colors ${ibmPlexMono.className} font-light`}>Home</Link>
+            <Link href="#projects" className={`hover:text-[#3ccf91] transition-colors ${ibmPlexMono.className} font-light`}>Projects</Link>
+            <Link href="#blog" className={`hover:text-[#3ccf91] transition-colors ${ibmPlexMono.className} font-light`}>Blog</Link>
           </nav>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-2xl"
+            className="md:hidden text-2xl relative w-6 h-6"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            ☰
+            <div className={`absolute w-6 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen
+              ? "rotate-45 top-3"
+              : "rotate-0 top-1"
+              }`} />
+            <div className={`absolute w-6 h-0.5 bg-white top-3 transition-all duration-300 ${isMobileMenuOpen
+              ? "opacity-0"
+              : "opacity-100"
+              }`} />
+            <div className={`absolute w-6 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen
+              ? "-rotate-45 top-3"
+              : "rotate-0 top-5"
+              }`} />
           </button>
         </div>
       </header>
 
       {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-black z-40 md:hidden pt-20">
-          <nav className="flex flex-col items-center gap-8 p-6">
-            <Link href="/" className="text-xl hover:text-[#3ccf91]">Home</Link>
-            <Link href="#projects" className="text-xl hover:text-[#3ccf91]">Projects</Link>
-            <Link href="#blog" className="text-xl hover:text-[#3ccf91]">Blog</Link>
-          </nav>
-        </div>
-      )}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            className="fixed inset-0 bg-black/90 backdrop-blur-sm z-40 md:hidden pt-20"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{
+              type: "tween",
+              duration: 0.3,
+              ease: "easeInOut"
+            }}
+          >
+            <nav className="flex flex-col items-center gap-8 p-6">
+              <Link href="/" className={`text-xl hover:text-[#3ccf91] ${ibmPlexMono.className} font-light`}>Home</Link>
+              <Link href="#projects" className={`text-xl hover:text-[#3ccf91] ${ibmPlexMono.className} font-light`}>Projects</Link>
+              <Link href="#blog" className={`text-xl hover:text-[#3ccf91] ${ibmPlexMono.className} font-light`}>Blog</Link>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Hero Section */}
       <motion.section
-        className="pt-32 px-6 min-h-screen flex items-center"
+        className="pt-32 px-6 min-h-screen flex items-center relative"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -77,7 +110,7 @@ export default function Home() {
             className="text-[#3ccf91] text-xl mb-4"
             {...fadeInUp}
           >
-            Hey there!, I'm-
+            Hey there! I'm-
           </motion.p>
           <motion.h1
             className="text-4xl md:text-7xl font-bold mb-6"
@@ -90,7 +123,7 @@ export default function Home() {
 
           <div className="space-y-2 mb-8">
             <h2 className="text-2xl md:text-3xl">Back-end Software Engineer.</h2>
-            <p className="text-gray-400 text-lg md:text-xl">
+            <p className={`text-gray-400 text-lg md:text-xl ${ibmPlexMono.className}`}>
               Construindo soluções back-end eficientes e seguras<br />
             </p>
           </div>
@@ -169,6 +202,36 @@ export default function Home() {
             )}
           </motion.div>
         </div>
+
+        {/* Scroll Down Arrow */}
+        <motion.div
+          className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <button
+            className="text-green-400 hover:text-[#3ccf91] transition-colors duration-300"
+            aria-label="Scroll down"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+          </button>
+        </motion.div>
       </motion.section>
 
       {/* About Section */}
@@ -189,7 +252,7 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-2xl md:text-3xl font-bold mb-8">⚡ About Me</h2>
+              <h2 className={`text-2xl md:text-3xl font-bold mb-8 ${poppins.className}`}>⚡ About Me</h2>
               <div className="space-y-8 text-gray-300">
                 <p className="font-['Merriweather'] italic text-lg md:text-xl leading-loose">
                   Olá! Meu nome é <span className="text-[#3ccf91] font-normal not-italic">Andrey Rosa</span> e sou um entusiasta da tecnologia e estudante de Ciências da Computação.
