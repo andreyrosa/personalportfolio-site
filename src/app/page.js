@@ -22,7 +22,8 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export default function Home() {
-  const [showEmail, setShowEmail] = useState(false);
+  const [showEmailHero, setShowEmailHero] = useState(false);
+  const [showEmailContact, setShowEmailContact] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -141,22 +142,33 @@ export default function Home() {
           </div>
 
           {/* Social Links */}
-          <div className="flex flex-wrap gap-4">
-            <Link href="https://github.com/andreyrosa" target="_blank" className="social-button">
-              <i className="fa-brands fa-github"></i>
+          <div className="flex items-center space-x-4">
+            <Link
+              href="https://github.com/andreyrosa"
+              target="_blank"
+              className={`social-button flex items-center gap-2 ${poppins.className}`}
+            >
+              <i className="fa-brands fa-github text-xl"></i>
               Github
             </Link>
-            <Link href="https://www.linkedin.com/in/andrey-rosa-b04660251/" target="_blank" className="social-button">
-              <i className="fa-brands fa-linkedin"></i>
+            <Link
+              href="https://www.linkedin.com/in/andrey-rosa-b04660251/"
+              target="_blank"
+              className={`social-button flex items-center gap-2 ${poppins.className}`}
+            >
+              <i className="fa-brands fa-linkedin text-xl"></i>
               Linkedin
             </Link>
-            <button onClick={() => setShowEmail(!showEmail)} className="social-button">
-              <i className="fa-solid fa-envelope"></i>
+            <button
+              onClick={() => setShowEmailHero(!showEmailHero)}
+              className={`social-button flex items-center gap-2 ${poppins.className}`}
+            >
+              <i className="fa-solid fa-envelope text-xl"></i>
               Email
             </button>
           </div>
 
-          {showEmail && (
+          {showEmailHero && (
             <motion.div
               initial={{ opacity: 0, y: -20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -172,7 +184,7 @@ export default function Home() {
                 <button
                   onClick={() => {
                     navigator.clipboard.writeText('andrey19rosa951@gmail.com');
-                    setShowEmail(false);
+                    setShowEmailHero(false);
                     setShowAlert(true);
                     setTimeout(() => setShowAlert(false), 3000);
                   }}
@@ -294,7 +306,7 @@ export default function Home() {
 
       {/* Keep In Touch Section */}
       <motion.section
-        className="px-6 py-20 text-center"
+        className="px-6 py-20 text-center relative"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -305,49 +317,60 @@ export default function Home() {
           I'm currently specializing in <span className="text-[#3ccf91]">Back-end Development</span>.<br />
           Feel free to get in touch and talk more about your projects.
         </p>
-        <div className="flex justify-center gap-4 flex-wrap relative">
-          <Link href="https://github.com/andreyrosa" target="_blank" className="social-button">
-            <i className="fa-brands fa-github"></i>
+        <div className="flex items-center justify-center space-x-4">
+          <Link
+            href="https://github.com/andreyrosa"
+            target="_blank"
+            className={`social-button flex items-center gap-2 ${poppins.className}`}
+          >
+            <i className="fa-brands fa-github text-xl"></i>
             Github
           </Link>
-          <Link href="https://www.linkedin.com/in/andrey-rosa-887b8733a/" target="_blank" className="social-button">
-            <i className="fa-brands fa-linkedin"></i>
+          <Link
+            href="https://www.linkedin.com/in/andrey-rosa-887b8733a/"
+            target="_blank"
+            className={`social-button flex items-center gap-2 ${poppins.className}`}
+          >
+            <i className="fa-brands fa-linkedin text-xl"></i>
             Linkedin
           </Link>
-          <button onClick={() => setShowEmail(!showEmail)} className="social-button">
-            <i className="fa-solid fa-envelope"></i>
+          <button
+            onClick={() => setShowEmailContact(!showEmailContact)}
+            className={`social-button flex items-center gap-2 ${poppins.className}`}
+          >
+            <i className="fa-solid fa-envelope text-xl"></i>
             Email
           </button>
-
-          {showEmail && (
-            <motion.div
-              initial={{ opacity: 0, y: -20, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="absolute mt-2 w-80 p-4 bg-gray-800/80 backdrop-blur-sm rounded-lg border border-gray-700 shadow-xl"
-            >
-              <div className="flex items-center justify-between gap-3">
-                <div>
-                  <p className="text-gray-400 text-xs mb-1">Meu email</p>
-                  <p className="text-[#3ccf91] font-medium text-sm">andrey19rosa951@gmail.com</p>
-                </div>
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText('andrey19rosa951@gmail.com');
-                    setShowEmail(false);
-                    setShowAlert(true);
-                    setTimeout(() => setShowAlert(false), 3000);
-                  }}
-                  className="px-3 py-1.5 bg-[#3ccf91]/10 hover:bg-[#3ccf91]/20 text-[#3ccf91] rounded-md transition-colors duration-200 flex items-center gap-1.5 text-sm"
-                >
-                  <i className="fa-regular fa-copy"></i>
-                  Copiar
-                </button>
-              </div>
-            </motion.div>
-          )}
         </div>
+
+        {showEmailContact && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="absolute mt-2 left-1/2 transform -translate-x-1/2 w-80 p-4 bg-gray-800/80 backdrop-blur-sm rounded-lg border border-gray-700 shadow-xl"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-gray-400 text-xs mb-1">Meu email</p>
+                <p className="text-[#3ccf91] font-medium text-sm">andrey19rosa951@gmail.com</p>
+              </div>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText('andrey19rosa951@gmail.com');
+                  setShowEmailContact(false);
+                  setShowAlert(true);
+                  setTimeout(() => setShowAlert(false), 3000);
+                }}
+                className="px-3 py-1.5 bg-[#3ccf91]/10 hover:bg-[#3ccf91]/20 text-[#3ccf91] rounded-md transition-colors duration-200 flex items-center gap-1.5 text-sm"
+              >
+                <i className="fa-regular fa-copy"></i>
+                Copiar
+              </button>
+            </div>
+          </motion.div>
+        )}
       </motion.section>
 
       {/* Footer */}
