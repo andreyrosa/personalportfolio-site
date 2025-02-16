@@ -1,8 +1,8 @@
 'use client';
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
 import { Merriweather, Poppins, IBM_Plex_Mono } from 'next/font/google';
 
 const merriweather = Merriweather({
@@ -27,6 +27,24 @@ export default function Home() {
   const [showAlert, setShowAlert] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const { scrollY } = useScroll();
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const unsubscribe = scrollY.on("change", (latest) => {
+      const windowHeight = window.innerHeight;
+      setScrollProgress(latest / windowHeight);
+    });
+
+    return () => unsubscribe();
+  }, [scrollY]);
+
+  // Reveal animation configuration
+  const revealVariants = {
+    hidden: { opacity: 0, y: 75 },
+    visible: { opacity: 1, y: 0 }
+  };
+
   // Configurações de animação
   const fadeInUp = {
     initial: { y: 30, opacity: 0 },
@@ -37,7 +55,12 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Header */}
-      <header className="fixed w-full top-0 p-6 bg-black/50 backdrop-blur-sm z-50">
+      <motion.header
+        className="fixed w-full top-0 p-6 bg-black/50 backdrop-blur-sm z-50"
+        style={{
+          opacity: 1 - (scrollProgress * 0.5), // Header fades out slower
+        }}
+      >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <Link href="/" className="text-2xl font-bold">
             <span className="text-gray-400">{'{'}</span>
@@ -71,26 +94,43 @@ export default function Home() {
               }`} />
           </button>
         </div>
-      </header>
+      </motion.header>
 
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 bg-black/90 backdrop-blur-sm z-40 md:hidden pt-20"
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
+            className="fixed inset-0 bg-black/95 z-40 md:hidden pt-20"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{
-              type: "tween",
-              duration: 0.3,
-              ease: "easeInOut"
+              duration: 0.2,
+              ease: "easeOut"
             }}
           >
             <nav className="flex flex-col items-center gap-8 p-6">
-              <Link href="/" className={`text-xl hover:text-[#3ccf91] ${ibmPlexMono.className} font-light`}>Home</Link>
-              <Link href="#projects" className={`text-xl hover:text-[#3ccf91] ${ibmPlexMono.className} font-light`}>Projects</Link>
-              <Link href="#blog" className={`text-xl hover:text-[#3ccf91] ${ibmPlexMono.className} font-light`}>Blog</Link>
+              <Link
+                href="/"
+                className={`text-xl hover:text-[#3ccf91] ${ibmPlexMono.className} font-light`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link
+                href="#projects"
+                className={`text-xl hover:text-[#3ccf91] ${ibmPlexMono.className} font-light`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Projects
+              </Link>
+              <Link
+                href="#blog"
+                className={`text-xl hover:text-[#3ccf91] ${ibmPlexMono.className} font-light`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Blog
+              </Link>
             </nav>
           </motion.div>
         )}
@@ -99,9 +139,10 @@ export default function Home() {
       {/* Hero Section */}
       <motion.section
         className="pt-32 px-6 min-h-screen flex items-center relative"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
+        style={{
+          opacity: 1 - scrollProgress,
+          transform: `translateY(${scrollProgress * 50}px)` // Slight parallax effect
+        }}
       >
         <div className="max-w-7xl mx-auto w-full relative">
           {/* Dot Pattern */}
@@ -254,10 +295,11 @@ export default function Home() {
       <motion.section
         className="px-6 py-20 relative"
         id="about"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        variants={revealVariants}
+        transition={{ duration: 0.6 }}
       >
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row gap-12 items-center">
@@ -312,10 +354,11 @@ export default function Home() {
       <motion.section
         className="px-6 py-20 relative"
         id="projects"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        variants={revealVariants}
+        transition={{ duration: 0.6 }}
       >
         <div className="max-w-7xl mx-auto">
           <h2 className={`text-2xl md:text-3xl font-bold mb-8 ${poppins.className}`}>
@@ -446,10 +489,11 @@ export default function Home() {
       {/* Keep In Touch Section */}
       <motion.section
         className="px-6 py-20 text-center relative"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        variants={revealVariants}
+        transition={{ duration: 0.6 }}
       >
         <h2 className="text-3xl md:text-4xl font-bold mb-6">Keep In Touch.</h2>
         <p className="mb-8 text-gray-300">
@@ -515,10 +559,11 @@ export default function Home() {
       {/* Footer */}
       <motion.footer
         className="px-6 py-8 border-t border-gray-800"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        variants={revealVariants}
+        transition={{ duration: 0.6 }}
       >
         <div className="max-w-7xl mx-auto text-center">
           <p className="mb-2">Designed and Developed by Andrey Rosa.</p>
