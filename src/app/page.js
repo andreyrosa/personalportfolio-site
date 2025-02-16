@@ -308,6 +308,141 @@ export default function Home() {
         </div>
       </motion.section>
 
+      {/* Projects Section */}
+      <motion.section
+        className="px-6 py-20 relative"
+        id="projects"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="max-w-7xl mx-auto">
+          <h2 className={`text-2xl md:text-3xl font-bold mb-8 ${poppins.className}`}>
+            <span className="text-[#3ccf91]">&lt;</span> Projects <span className="text-[#3ccf91]">/&gt;</span>
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Project Card 1 */}
+            <motion.div
+              className="bg-gray-900/50 rounded-lg overflow-hidden border border-gray-800 hover:border-[#3ccf91] transition-colors duration-300"
+              initial={{ y: 30, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="relative h-48 w-full bg-gray-800">
+                <Image
+                  src="/project1.jpg"
+                  alt="Project 1"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className={`text-xl font-bold mb-3 ${poppins.className}`}>Project Name 1</h3>
+                <p className="text-gray-400 mb-4">
+                  Description of your first project. Explain what it does and what technologies were used.
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className={`text-sm px-3 py-1 rounded-full bg-[#3ccf91]/10 text-[#3ccf91] ${ibmPlexMono.className}`}>
+                    React
+                  </span>
+                  <span className={`text-sm px-3 py-1 rounded-full bg-[#3ccf91]/10 text-[#3ccf91] ${ibmPlexMono.className}`}>
+                    Node.js
+                  </span>
+                  <span className={`text-sm px-3 py-1 rounded-full bg-[#3ccf91]/10 text-[#3ccf91] ${ibmPlexMono.className}`}>
+                    MongoDB
+                  </span>
+                </div>
+                <div className="flex gap-4">
+                  <Link
+                    href="https://github.com/yourusername/project1"
+                    target="_blank"
+                    className="social-button flex items-center gap-2 px-4 py-2"
+                  >
+                    <i className="fa-brands fa-github"></i>
+                    Code
+                  </Link>
+                  <Link
+                    href="https://project1.com"
+                    target="_blank"
+                    className="social-button flex items-center gap-2 px-4 py-2"
+                  >
+                    <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                    Live Demo
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Project Card 2 */}
+            <motion.div
+              className="bg-gray-900/50 rounded-lg overflow-hidden border border-gray-800 hover:border-[#3ccf91] transition-colors duration-300"
+              initial={{ y: 30, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <div className="relative h-48 w-full bg-gray-800">
+                <Image
+                  src="/project2.jpg"
+                  alt="Project 2"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className={`text-xl font-bold mb-3 ${poppins.className}`}>Project Name 2</h3>
+                <p className="text-gray-400 mb-4">
+                  Description of your second project. Explain what it does and what technologies were used.
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className={`text-sm px-3 py-1 rounded-full bg-[#3ccf91]/10 text-[#3ccf91] ${ibmPlexMono.className}`}>
+                    Python
+                  </span>
+                  <span className={`text-sm px-3 py-1 rounded-full bg-[#3ccf91]/10 text-[#3ccf91] ${ibmPlexMono.className}`}>
+                    Django
+                  </span>
+                  <span className={`text-sm px-3 py-1 rounded-full bg-[#3ccf91]/10 text-[#3ccf91] ${ibmPlexMono.className}`}>
+                    PostgreSQL
+                  </span>
+                </div>
+                <div className="flex gap-4">
+                  <Link
+                    href="https://github.com/yourusername/project2"
+                    target="_blank"
+                    className="social-button flex items-center gap-2 px-4 py-2"
+                  >
+                    <i className="fa-brands fa-github"></i>
+                    Code
+                  </Link>
+                  <Link
+                    href="https://project2.com"
+                    target="_blank"
+                    className="social-button flex items-center gap-2 px-4 py-2"
+                  >
+                    <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                    Live Demo
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* View More Projects Button */}
+          <div className="text-center mt-12">
+            <Link
+              href="https://github.com/andreyrosa"
+              target="_blank"
+              className={`inline-block px-6 py-3 border border-[#3ccf91] text-[#3ccf91] rounded-md hover:bg-[#3ccf91] hover:text-black transition-colors duration-300 ${poppins.className}`}
+            >
+              View More on GitHub
+            </Link>
+          </div>
+        </div>
+      </motion.section>
+
       {/* Keep In Touch Section */}
       <motion.section
         className="px-6 py-20 text-center relative"
