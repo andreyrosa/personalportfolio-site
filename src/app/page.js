@@ -125,45 +125,49 @@ export default function Home() {
           <div className="space-y-2 mb-8">
             <h2 className="text-2xl md:text-3xl">Back-end Software Engineer.</h2>
             <p className={`text-gray-400 text-lg md:text-xl ${ibmPlexMono.className}`}>
-              Construindo soluções back-end eficientes e seguras<br />
+              Building reliable and efficient Back-end applications.
+              <br />
             </p>
           </div>
 
-          <div className="space-y-2 mb-12 text-gray-400">
-            <p className="flex items-center gap-2">
-              <span>🚀</span> Exploring opportunities and side projects.
+          <div className="space-y-2 sm:space-y-3 mb-8 sm:mb-12 text-gray-400 px-4 sm:px-0">
+            <p className="flex items-center gap-2 text-sm sm:text-base">
+              <span className="text-base sm:text-lg">🚀</span>
+              <span className="flex-1">Exploring opportunities and side projects.</span>
             </p>
-            <p className="flex items-center gap-2">
-              <span>💻</span> Currently building{" "}
-              <Link href="/" className="text-[#3ccf91] hover:underline">
-                personal projects
-              </Link>.
+            <p className="flex items-center gap-2 text-sm sm:text-base">
+              <span className="text-base sm:text-lg">💻</span>
+              <span className="flex-1">Currently building{" "}
+                <Link href="/" className="text-[#3ccf91] hover:underline">
+                  personal projects
+                </Link>.
+              </span>
             </p>
           </div>
 
           {/* Social Links */}
-          <div className="flex items-center space-x-4">
+          <div className="flex flex-wrap items-center gap-3 max-w-full">
             <Link
               href="https://github.com/andreyrosa"
               target="_blank"
-              className={`social-button flex items-center gap-2 ${poppins.className}`}
+              className={`social-button flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base ${poppins.className}`}
             >
-              <i className="fa-brands fa-github text-xl"></i>
+              <i className="fa-brands fa-github text-lg sm:text-xl"></i>
               Github
             </Link>
             <Link
-              href="https://www.linkedin.com/in/andrey-rosa-b04660251/"
+              href="https://www.linkedin.com/in/andrey-rosa-887b8733a"
               target="_blank"
-              className={`social-button flex items-center gap-2 ${poppins.className}`}
+              className={`social-button flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base ${poppins.className}`}
             >
-              <i className="fa-brands fa-linkedin text-xl"></i>
+              <i className="fa-brands fa-linkedin text-lg sm:text-xl"></i>
               Linkedin
             </Link>
             <button
               onClick={() => setShowEmailHero(!showEmailHero)}
-              className={`social-button flex items-center gap-2 ${poppins.className}`}
+              className={`social-button flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base ${poppins.className}`}
             >
-              <i className="fa-solid fa-envelope text-xl"></i>
+              <i className="fa-solid fa-envelope text-lg sm:text-xl"></i>
               Email
             </button>
           </div>
@@ -267,18 +271,18 @@ export default function Home() {
               <h2 className={`text-2xl md:text-3xl font-bold mb-8 ${poppins.className}`}>⚡ About Me</h2>
               <div className="space-y-8 text-gray-300">
                 <p className="font-['Merriweather'] italic text-lg md:text-xl leading-loose">
-                  Olá! Meu nome é <span className="text-[#3ccf91] font-normal not-italic">Andrey Rosa</span> e sou um entusiasta da tecnologia e estudante de Ciências da Computação.
+                  Hello! My name is <span className="text-[#3ccf91] font-normal not-italic">Andrey Rosa</span> and I'm a technology enthusiast and Computer Science student.
                 </p>
                 <p className="font-['Merriweather'] italic text-lg md:text-xl leading-loose">
-                  Desde 2020, tenho explorado o mundo do <span className="text-[#3ccf91] font-normal not-italic">Desenvolvimento de software</span>, adquirindo experiência com linguagens
-                  como Python, JavaScript e, atualmente, estou me aprofundando em Java.
+                  Since 2020, I have been exploring the world of <span className="text-[#3ccf91] font-normal not-italic">Software Development</span>, gaining experience with languages
+                  like Python, JavaScript, and currently, I am diving deeper into Java.
                 </p>
                 <p className="font-['Merriweather'] italic text-lg md:text-xl leading-loose">
-                  Apesar de ter começado minha jornada acadêmica recentemente, já possuo uma base sólida em <span className="text-[#3ccf91] font-normal not-italic">desenvolvimento de software</span> e versionamento de código
-                  utilizando <span className="text-[#3ccf91] font-normal not-italic">Git</span>.
+                  Although I started my academic journey recently, I already have a solid foundation in <span className="text-[#3ccf91] font-normal not-italic">software development</span> and code versioning
+                  using <span className="text-[#3ccf91] font-normal not-italic">Git</span>.
                 </p>
                 <p className="text-gray-400 text-base md:text-lg mt-8 leading-relaxed font-light tracking-wide">
-                  Estou constantemente buscando aprender novas tecnologias e aprimorar minhas habilidades para me tornar um desenvolvedor mais completo.
+                  I am constantly striving to learn new technologies and improve my skills to become a more well-rounded developer.
                 </p>
               </div>
             </motion.div>
@@ -317,28 +321,28 @@ export default function Home() {
           I'm currently specializing in <span className="text-[#3ccf91]">Back-end Development</span>.<br />
           Feel free to get in touch and talk more about your projects.
         </p>
-        <div className="flex items-center justify-center space-x-4">
+        <div className="flex flex-wrap items-center justify-center gap-3 max-w-full">
           <Link
             href="https://github.com/andreyrosa"
             target="_blank"
-            className={`social-button flex items-center gap-2 ${poppins.className}`}
+            className={`social-button flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base ${poppins.className}`}
           >
-            <i className="fa-brands fa-github text-xl"></i>
+            <i className="fa-brands fa-github text-lg sm:text-xl"></i>
             Github
           </Link>
           <Link
-            href="https://www.linkedin.com/in/andrey-rosa-887b8733a/"
+            href="https://www.linkedin.com/in/andrey-rosa-887b8733a"
             target="_blank"
-            className={`social-button flex items-center gap-2 ${poppins.className}`}
+            className={`social-button flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base ${poppins.className}`}
           >
-            <i className="fa-brands fa-linkedin text-xl"></i>
+            <i className="fa-brands fa-linkedin text-lg sm:text-xl"></i>
             Linkedin
           </Link>
           <button
             onClick={() => setShowEmailContact(!showEmailContact)}
-            className={`social-button flex items-center gap-2 ${poppins.className}`}
+            className={`social-button flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base ${poppins.className}`}
           >
-            <i className="fa-solid fa-envelope text-xl"></i>
+            <i className="fa-solid fa-envelope text-lg sm:text-xl"></i>
             Email
           </button>
         </div>
